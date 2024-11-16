@@ -81,6 +81,9 @@ nav ul li a.active{
 .btn{
     @apply text-lg font-semibold text-white px-7 py-4 rounded-lg
 }
+.btn-sm{
+    @apply text-base font-medium text-green1 px-4 py-2 rounded-full
+}
 
 .btn-green {
     @apply bg-green1
