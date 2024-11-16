@@ -70,3 +70,10 @@
 .bg-blue2{
     background-color: #50B1C90D;
 }
+
+nav ul li a.active{
+    border: 2px solid #23BE0A;
+    color: #23BE0A;
+    border-radius: 8px;
+    font-weight: 600;
+}
