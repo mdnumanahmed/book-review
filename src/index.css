@@ -44,7 +44,7 @@
 }
 
 .bg-dark1{
-    color: #1313130D;
+    background-color: #1313130D;
 }
 
 .text-green1{
@@ -76,4 +76,16 @@ nav ul li a.active{
     color: #23BE0A;
     border-radius: 8px;
     font-weight: 600;
+}
+
+.btn{
+    @apply text-lg font-semibold text-white px-7 py-4 rounded-lg
+}
+
+.btn-green {
+    @apply bg-green1
+}
+
+.btn-blue {
+    @apply bg-blue1
 }
