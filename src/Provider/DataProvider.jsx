@@ -7,6 +7,10 @@ const DataProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(true);
+  const [readList, setReadList] = useState([]);
+  const [wishList, setWishList] = useState([]);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     const loadData = async () => {
@@ -23,7 +27,36 @@ const DataProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const values = { books, handleBookDetails, book, loading };
+  useEffect(
+    (key = active ? "read-list" : "wishlist") => {
+      const readListIds = JSON.parse(localStorage.getItem(key));
+      const readListBooks = books?.filter((b) =>
+        readListIds?.includes(b.bookId)
+      );
+      setReadList(readListBooks);
+
+      const wishListIds = JSON.parse(localStorage.getItem(key));
+      const wishListBooks = books?.filter((b) =>
+        wishListIds?.includes(b.bookId)
+      );
+      setWishList(wishListBooks);
+    },
+    [books, active, reload, readList, wishList]
+  );
+
+  const values = {
+    books,
+    handleBookDetails,
+    book,
+    loading,
+    readList,
+    active,
+    wishList,
+    setActive,
+    setWishList,
+    setReadList,
+    setReload,
+  };
 
   return <DataContext.Provider value={values}>{children}</DataContext.Provider>;
 };

@@ -1,9 +1,16 @@
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa6";
-import { IoNewspaperOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import ListedBook from "./ListedBook";
+import { useContext } from "react";
+import { DataContext } from "../../Provider/DataProvider";
+import Loader from "../../Shared/Loader/Loader";
 
 const ListedBooks = () => {
+  const { readList, active, setActive, wishList, loading } =
+    useContext(DataContext);
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div>
       <div className="container mx-auto">
@@ -27,58 +34,29 @@ const ListedBooks = () => {
       <div className="container mx-auto py-10">
         <div className="tab border-b-2 border-gray-600 py-2">
           <NavLink
-            to={"/books/read-books"}
-            className="text-lg text-dark2 px-4 py-3 border-2 border-b-white bg-white border-gray-600 rounded-t-lg"
+            to={"/listed-books/read-book"}
+            onClick={() => setActive(true)}
+            className="text-lg text-dark2 px-4 py-3"
           >
             Read Books
           </NavLink>
           <NavLink
-            to={"/books/wishlist-books"}
+            to={"/listed-books/wishlist-book"}
+            onClick={() => setActive(false)}
             className="text-lg text-dark2 px-4 py-3 "
           >
             Wishlist Books
           </NavLink>
         </div>
-        <div>
-          <div className="p-6 rounded-2xl flex gap-6">
-            <div className="max-w-60 rounded-2xl px-12 py-7">
-              <img src="" alt="" />
-            </div>
-            <div className="flex-1 space-y-4">
-              <h3 className="font-bold text-dark1">The Catcher in the Rye</h3>
-              <p className="font-medium text-dark2">By : Awlad Hossain</p>
-              <div className="flex gap-3 items-center">
-                <div className="flex items-center gap-2">
-                  <p>Tags</p>
-                  <button className="btn-sm bg-green-50">Fiction</button>
-                  <button className="btn-sm bg-green-50">Fiction</button>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaMapMarkerAlt /> Year of Publishing: 1924
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <p className="flex items-center gap-2">
-                  <FaUsers /> Publisher: Scribner
-                </p>
-                <p className="flex items-center gap-2">
-                  <IoNewspaperOutline /> Page 192
-                </p>
-              </div>
-              <hr />
-              <div className="space-x-4">
-                <button className="text-[#328EFF] bg-[#328eff1A] px-5 py-2 rounded-full">
-                  Category: Classic
-                </button>
-                <button className="text-[#FFAC33] bg-[#FFAC331A] px-5 py-2 rounded-full">
-                  Rating: 4.5
-                </button>
-                <button className="text-white bg-green1 px-5 py-2 rounded-full">
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="py-8 space-y-6">
+          {active &&
+            readList.map((book) => (
+              <ListedBook key={book.bookId} book={book} />
+            ))}
+          {!active &&
+            wishList.map((book) => (
+              <ListedBook key={book.bookId} book={book} />
+            ))}
         </div>
       </div>
     </div>

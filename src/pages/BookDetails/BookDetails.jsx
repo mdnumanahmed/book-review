@@ -5,7 +5,8 @@ import { getStoredData, saveToLocalStorage } from "../../utilities/saveToDb";
 import { toast } from "react-toastify";
 
 const BookDetails = () => {
-  const { book, loading } = useContext(DataContext);
+  const { book, loading, setWishList, setReadList, books, setReload } =
+    useContext(DataContext);
 
   if (loading) {
     return <Loader />;
@@ -27,14 +28,23 @@ const BookDetails = () => {
 
   const handleWishlist = (id, key) => {
     const readListIds = getStoredData("read-list");
-    if (readListIds.includes(id)) {
+    if (readListIds?.includes(id)) {
       toast.error("Added in Read List, Try another!");
       return;
     }
     const wishlistIds = getStoredData(key);
-    if (!wishlistIds.includes(id)) {
+    if (!wishlistIds?.includes(id)) {
       saveToLocalStorage(id, key);
       toast.success("Added successfully in Wish List! ");
+
+      // For instant updating the state in DataProvider
+      // const wishListIds = JSON.parse(localStorage.getItem(key));
+      // const wishListBooks = books?.filter((b) =>
+      //   wishListIds?.includes(b.bookId)
+      // );
+      // setWishList(wishListBooks);
+      setReload((prev) => prev + 1);
+
       return;
     }
     toast.warning("Already added, Try to Read book!");
@@ -46,6 +56,15 @@ const BookDetails = () => {
     if (!storedIds.includes(id)) {
       saveToLocalStorage(id, key);
       toast.success("Added successfully in Read List! ");
+
+      // For instant updating the state in DataProvider
+      // const readListIds = JSON.parse(localStorage.getItem(key));
+      // const readListBooks = books?.filter((b) =>
+      //   readListIds?.includes(b.bookId)
+      // );
+      // setReadList(readListBooks);
+      setReload((prev) => prev + 1);
+
       return;
     }
     toast.warning("Already added, Try another book!");
