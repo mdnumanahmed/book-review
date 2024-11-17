@@ -6,6 +6,9 @@ import MainLayout from "./layouts/MainLayout/MainLayout.jsx";
 import Home from "./pages/HomePage/Home/Home.jsx";
 import DataProvider from "./Provider/DataProvider.jsx";
 import BookDetails from "./pages/BookDetails/BookDetails.jsx";
+import ListedBooks from "./pages/ListedBooks/ListedBooks.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
         path: "/book/:bookId",
         element: <BookDetails />,
       },
+      {
+        path: "/listed-books",
+        element: <ListedBooks />,
+      },
     ],
   },
 ]);
@@ -28,6 +35,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DataProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </DataProvider>
   </StrictMode>
 );

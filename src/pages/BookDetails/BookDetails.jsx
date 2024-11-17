@@ -17,9 +17,9 @@ const BookDetails = () => {
   } = book;
   return (
     <div>
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="container mx-auto pb-40 grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="p-20 bg-dark1 rounded-2xl">
-          <img src={image} alt="" />
+          <img src={image} alt="" className="rounded-2xl" />
         </div>
         <div className="space-y-5">
           <h2>{bookName}</h2>
