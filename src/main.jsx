@@ -35,7 +35,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <DataProvider>
       <RouterProvider router={router} />
-      <ToastContainer />
     </DataProvider>
+    <ToastContainer />
   </StrictMode>
 );

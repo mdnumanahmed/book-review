@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Book = ({ book, handleBookDetails }) => {
   const { bookId, author, bookName, category, image, tags, rating } = book;
   return (
-    <Link to={`/book/${bookId}`} onClick={() => handleBookDetails(book.bookId)}>
+    <Link to={`/book/${bookId}`} onClick={() => handleBookDetails(book)}>
       <div className="p-6 rounded-2xl border-2">
         <div className="text-center py-8 rounded-xl bg-dark1 mb-6">
           <img src={image} alt="" className="h-36 object-cover inline-block" />
@@ -13,11 +13,7 @@ const Book = ({ book, handleBookDetails }) => {
         <div className="space-y-4">
           <div>
             {tags.map((tag, idx) => (
-              <button
-                onClick={(e) => console.log(e.target)}
-                key={idx}
-                className="btn-sm bg-green2"
-              >
+              <button key={idx} className="btn-sm bg-green2">
                 {tag}
               </button>
             ))}

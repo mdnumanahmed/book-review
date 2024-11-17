@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { DataContext } from "../../Provider/DataProvider";
+import Loader from "../../Shared/Loader/Loader";
+import { getStoredData, saveToLocalStorage } from "../../utilities/saveToDb";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
-  const { book } = useContext(DataContext);
+  const { book, loading } = useContext(DataContext);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   const {
+    bookId,
     author,
     bookName,
     category,
@@ -15,6 +24,18 @@ const BookDetails = () => {
     tags,
     rating,
   } = book;
+
+  const handleWishlist = (id, key) => {
+    const wishlistIds = getStoredData(key);
+    if (!wishlistIds.includes(id)) {
+      saveToLocalStorage(id, key);
+      toast.success("Added successfully in Wish List! ");
+      return;
+    }
+    toast.warning("Already added, Try to Read book!");
+    return false;
+  };
+
   return (
     <div>
       <div className="container mx-auto pb-40 grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -37,7 +58,6 @@ const BookDetails = () => {
                 {tag}
               </button>
             ))}
-            <button className="btn-sm">Fiction</button>
           </div>
           <div className="w-full h-0.5 bg-dark1"></div>
           <table>
@@ -62,7 +82,12 @@ const BookDetails = () => {
           </table>
           <div className="space-x-4">
             <button className="btn-outline border-2 border-black">Read</button>
-            <button className="btn btn-blue">Wishlist</button>
+            <button
+              onClick={() => handleWishlist(bookId, "wishlist")}
+              className="btn btn-blue"
+            >
+              Wishlist
+            </button>
           </div>
         </div>
       </div>

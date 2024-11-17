@@ -1,9 +1,15 @@
 import { useContext } from "react";
 import Book from "./Book";
 import { DataContext } from "../../../Provider/DataProvider";
+import Loader from "../../../Shared/Loader/Loader";
 
 const Books = () => {
-  const { books, handleBookDetails } = useContext(DataContext);
+  const { books, handleBookDetails, loading } = useContext(DataContext);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div>
       <div className="container mx-auto py-24">
