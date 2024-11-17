@@ -5,6 +5,7 @@ export const DataContext = createContext(null);
 
 const DataProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
+  const [book, setBook] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
@@ -15,7 +16,15 @@ const DataProvider = ({ children }) => {
     loadData();
   }, []);
 
-  const values = { books };
+  const handleBookDetails = async (id) => {
+    const res = await fetch("/booksData.json");
+    const books = await res.json();
+    const foundedBook = books.find((book) => book.bookId === id);
+    console.log(foundedBook);
+    setBook(foundedBook);
+  };
+
+  const values = { books, handleBookDetails, book };
 
   return <DataContext.Provider value={values}>{children}</DataContext.Provider>;
 };

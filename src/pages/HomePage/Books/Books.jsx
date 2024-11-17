@@ -3,8 +3,7 @@ import Book from "./Book";
 import { DataContext } from "../../../Provider/DataProvider";
 
 const Books = () => {
-  const { books } = useContext(DataContext);
-  console.log(books);
+  const { books, handleBookDetails } = useContext(DataContext);
   return (
     <div>
       <div className="container mx-auto py-24">
@@ -13,7 +12,11 @@ const Books = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {books.map((book) => (
-            <Book key={book.bookId} book={book} />
+            <Book
+              key={book.bookId}
+              book={book}
+              handleBookDetails={handleBookDetails}
+            />
           ))}
         </div>
       </div>

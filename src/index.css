@@ -24,6 +24,11 @@
     h3{
         font-size: 24px;
     }
+    h4{
+        font-size: 20px;
+        font-weight: 600;
+        color: #1313130D;
+    }
 }
 
 
@@ -79,16 +84,21 @@ nav ul li a.active{
 }
 
 .btn{
-    @apply text-lg font-semibold text-white px-7 py-4 rounded-lg
+    @apply text-lg font-semibold  px-7 py-4 rounded-lg
 }
+
+.btn-outline{
+    @apply text-lg font-semibold text-dark1 px-7 py-4 rounded-lg
+}
+
 .btn-sm{
     @apply text-base font-medium text-green1 px-4 py-2 rounded-full
 }
 
 .btn-green {
-    @apply bg-green1
+    @apply bg-green1 text-white
 }
 
 .btn-blue {
-    @apply bg-blue1
+    @apply bg-blue1 text-white
 }
