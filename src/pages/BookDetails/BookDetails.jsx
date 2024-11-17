@@ -26,6 +26,11 @@ const BookDetails = () => {
   } = book;
 
   const handleWishlist = (id, key) => {
+    const readListIds = getStoredData("read-list");
+    if (readListIds.includes(id)) {
+      toast.error("Added in Read List, Try another!");
+      return;
+    }
     const wishlistIds = getStoredData(key);
     if (!wishlistIds.includes(id)) {
       saveToLocalStorage(id, key);
@@ -34,6 +39,16 @@ const BookDetails = () => {
     }
     toast.warning("Already added, Try to Read book!");
     return false;
+  };
+
+  const handleReadList = (id, key) => {
+    const storedIds = getStoredData(key);
+    if (!storedIds.includes(id)) {
+      saveToLocalStorage(id, key);
+      toast.success("Added successfully in Read List! ");
+      return;
+    }
+    toast.warning("Already added, Try another book!");
   };
 
   return (
@@ -81,7 +96,12 @@ const BookDetails = () => {
             </tbody>
           </table>
           <div className="space-x-4">
-            <button className="btn-outline border-2 border-black">Read</button>
+            <button
+              onClick={() => handleReadList(bookId, "read-list")}
+              className="btn-outline border-2 border-black"
+            >
+              Read
+            </button>
             <button
               onClick={() => handleWishlist(bookId, "wishlist")}
               className="btn btn-blue"
