@@ -41,7 +41,7 @@ const DataProvider = ({ children }) => {
       );
       setWishList(wishListBooks);
     },
-    [books, active, reload, readList, wishList]
+    [books, active, reload]
   );
 
   const values = {

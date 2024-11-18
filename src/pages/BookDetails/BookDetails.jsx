@@ -82,19 +82,19 @@ const BookDetails = () => {
           <hr />
           <h4 className="text-dark2">{category}</h4>
           <hr />
-          <p>
-            <span className="font-bold text-dark1">Review :</span> {review}
+          <p className="text-justify">
+            <span className="font-bold text-dark1 ">Review :</span> {review}
           </p>
           <div className="flex gap-3 items-center">
             <p className="font-bold text-dark1">Tags</p>
-            {tags.map((tag, idx) => (
-              <button key={idx} className="btn-sm">
+            {tags?.map((tag, idx) => (
+              <button key={idx} className="btn-sm bg-green-300/15">
                 {tag}
               </button>
             ))}
           </div>
           <div className="w-full h-0.5 bg-dark1"></div>
-          <table>
+          <table className="table w-3/5">
             <tbody>
               <tr>
                 <td>Number of Pages:</td>

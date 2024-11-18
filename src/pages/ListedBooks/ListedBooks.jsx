@@ -5,7 +5,7 @@ import { DataContext } from "../../Provider/DataProvider";
 import Loader from "../../Shared/Loader/Loader";
 
 const ListedBooks = () => {
-  const { readList, active, setActive, wishList, loading } =
+  const { readList, active, setActive, wishList, loading, handleBookDetails } =
     useContext(DataContext);
 
   if (loading) {
@@ -51,11 +51,19 @@ const ListedBooks = () => {
         <div className="py-8 space-y-6">
           {active &&
             readList.map((book) => (
-              <ListedBook key={book.bookId} book={book} />
+              <ListedBook
+                key={book.bookId}
+                book={book}
+                handleBookDetails={handleBookDetails}
+              />
             ))}
           {!active &&
             wishList.map((book) => (
-              <ListedBook key={book.bookId} book={book} />
+              <ListedBook
+                key={book.bookId}
+                book={book}
+                handleBookDetails={handleBookDetails}
+              />
             ))}
         </div>
       </div>

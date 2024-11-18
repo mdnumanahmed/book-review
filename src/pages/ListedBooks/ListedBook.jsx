@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
 import { IoNewspaperOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
-const ListedBook = ({ book }) => {
+const ListedBook = ({ book, handleBookDetails }) => {
   const {
     bookId,
     author,
@@ -27,7 +28,7 @@ const ListedBook = ({ book }) => {
         <div className="flex gap-10 items-center">
           <div className="flex items-center gap-2">
             <p>Tags</p>
-            {tags.map((tag, idx) => (
+            {tags?.map((tag, idx) => (
               <button key={idx} className="btn-sm bg-green-50">
                 {tag}
               </button>
@@ -53,12 +54,14 @@ const ListedBook = ({ book }) => {
           <button className="text-[#FFAC33] bg-[#FFAC331A] px-5 py-2 rounded-full">
             Rating: {rating}
           </button>
-          <button
-            onClick={() => bookId}
-            className="text-white bg-green1 px-5 py-2 rounded-full"
-          >
-            View Details
-          </button>
+          <Link to={`/book/${bookId}`}>
+            <button
+              onClick={() => handleBookDetails(book)}
+              className="text-white bg-green1 px-5 py-2 rounded-full"
+            >
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -67,6 +70,7 @@ const ListedBook = ({ book }) => {
 
 ListedBook.propTypes = {
   book: PropTypes.object.isRequired,
+  handleBookDetails: PropTypes.func.isRequired,
 };
 
 export default ListedBook;
