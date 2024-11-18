@@ -10,6 +10,7 @@ const DataProvider = ({ children }) => {
   const [active, setActive] = useState(true);
   const [readList, setReadList] = useState([]);
   const [wishList, setWishList] = useState([]);
+  const [sortedBook, setSortedBook] = useState([]);
   const [reload, setReload] = useState(0);
 
   useEffect(() => {
@@ -44,6 +45,25 @@ const DataProvider = ({ children }) => {
     [books, active, reload]
   );
 
+  const handleSortBook = (value) => {
+    if (value === "rating") {
+      const ratingSort = readList.sort((a, b) => {
+        return b.rating - a.rating;
+      });
+      setSortedBook(ratingSort);
+    } else if (value === "totalPage") {
+      const pageSort = readList.sort((a, b) => {
+        return b.totalPages - a.totalPages;
+      });
+      setSortedBook(pageSort);
+    } else if (value === "publishedYear") {
+      const yearSort = readList.sort((a, b) => {
+        return b.yearOfPublishing - a.yearOfPublishing;
+      });
+      setSortedBook(yearSort);
+    }
+  };
+
   const values = {
     books,
     handleBookDetails,
@@ -56,6 +76,8 @@ const DataProvider = ({ children }) => {
     setWishList,
     setReadList,
     setReload,
+    handleSortBook,
+    sortedBook,
   };
 
   return <DataContext.Provider value={values}>{children}</DataContext.Provider>;

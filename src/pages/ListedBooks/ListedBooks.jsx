@@ -5,8 +5,17 @@ import { DataContext } from "../../Provider/DataProvider";
 import Loader from "../../Shared/Loader/Loader";
 
 const ListedBooks = () => {
-  const { readList, active, setActive, wishList, loading, handleBookDetails } =
-    useContext(DataContext);
+  const {
+    readList,
+    active,
+    setActive,
+    wishList,
+    loading,
+    handleBookDetails,
+    handleSortBook,
+  } = useContext(DataContext);
+  // // const [displayed, setDisplayed] = useState(readList);
+  // const [sortedBook, setSortedBook] = useState(readList);
 
   if (loading) {
     return <Loader />;
@@ -19,14 +28,14 @@ const ListedBooks = () => {
         </div>
         <div className="text-center py-8">
           <select
-            onClick={(e) => console.log(e.target)}
+            onClick={(e) => handleSortBook(e.target.value)}
             className="focus:outline-none bg-green1 text-lg font-semibold text-white text-center px-10 py-4 rounded-lg "
           >
             <optgroup className="bg-gray-200 text-lg text-left ml-0 pl-0 text-dark2  rounded-lg">
               <option value="">Sort By</option>
               <option value="rating">Rating</option>
               <option value="totalPage">Number of pages</option>
-              <option value="publishYear">Publisher year</option>
+              <option value="publishedYear">Published year</option>
             </optgroup>
           </select>
         </div>
@@ -49,14 +58,13 @@ const ListedBooks = () => {
           </NavLink>
         </div>
         <div className="py-8 space-y-6">
-          {active &&
-            readList.map((book) => (
-              <ListedBook
-                key={book.bookId}
-                book={book}
-                handleBookDetails={handleBookDetails}
-              />
-            ))}
+          {readList.map((book) => (
+            <ListedBook
+              key={book.bookId}
+              book={book}
+              handleBookDetails={handleBookDetails}
+            />
+          ))}
           {!active &&
             wishList.map((book) => (
               <ListedBook
