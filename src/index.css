@@ -103,9 +103,9 @@ nav ul li a.active{
     @apply bg-blue1 text-white
 }
 
-.tab a.active{
+/* .tab a.active{
     @apply border-2 border-b-white bg-white border-gray-600 rounded-t-lg
-}
+} */
 
 .custom-select::after {
   content: "\e0e5";

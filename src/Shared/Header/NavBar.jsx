@@ -18,7 +18,7 @@ const NavBar = () => {
             </li>
             <li>
               <NavLink
-                to={"/listed-books/read-book"}
+                to={"/listed-books"}
                 className="text-lg text-dark2 px-5 py-3"
               >
                 Listed Books
