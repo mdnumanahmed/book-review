@@ -1,8 +1,14 @@
-# React + Vite
+# Book Review
+## Live Site Link : to visit click [Book Review](https://exultant-van.surge.sh/) 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a practice project to explore react-router and context-api.
 
-Currently, two official plugins are available:
+## Key Features
+- Custom responsive Navbar
+- Responsive for mobile and desktop
+- Dynamic routing added
+- All states maintain using Context-API and used on all components.
+- Stored read list books and wishlist books in LocalStorage and Displayed the lists from here.
+- Designed custom tab system and displayed data conditionally.
+- Implemented sorting functionality for 3 filled on read list and wishlist books etc.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
