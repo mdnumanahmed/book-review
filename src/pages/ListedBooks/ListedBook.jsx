@@ -18,14 +18,14 @@ const ListedBook = ({ book, handleBookDetails }) => {
     rating,
   } = book;
   return (
-    <div className="p-6 border-2 border-black/15 rounded-2xl flex gap-6">
-      <div className="max-w-60 rounded-2xl bg-dark1 px-12 py-7">
-        <img src={image} alt="" className="max-h-44" />
+    <div className="p-6 border-2 border-black/15 rounded-2xl flex flex-col lg:flex-row gap-6">
+      <div className="w-full lg:max-w-60 text-center rounded-2xl bg-dark1 px-12 py-7">
+        <img src={image} alt="" className="max-h-44 inline-block" />
       </div>
       <div className="flex-1 space-y-4">
         <h3 className="font-bold text-dark1">{bookName}</h3>
         <p className="font-medium text-dark2">By : {author}</p>
-        <div className="flex gap-10 items-center">
+        <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 lg:items-center">
           <div className="flex items-center gap-2">
             <p>Tags</p>
             {tags?.map((tag, idx) => (
@@ -38,7 +38,7 @@ const ListedBook = ({ book, handleBookDetails }) => {
             <FaMapMarkerAlt /> Year of Publishing: {yearOfPublishing}
           </div>
         </div>
-        <div className="flex items-center gap-10">
+        <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 lg:items-center">
           <p className="flex items-center gap-2">
             <FaUsers /> Publisher: {publisher}
           </p>
@@ -47,7 +47,7 @@ const ListedBook = ({ book, handleBookDetails }) => {
           </p>
         </div>
         <hr />
-        <div className="space-x-4">
+        <div className="space-x-4 text-center lg:text-left ">
           <button className="text-[#328EFF] bg-[#328eff1A] px-5 py-2 rounded-full">
             Category: {category}
           </button>
@@ -57,7 +57,7 @@ const ListedBook = ({ book, handleBookDetails }) => {
           <Link to={`/book/${bookId}`}>
             <button
               onClick={() => handleBookDetails(book)}
-              className="text-white bg-green1 px-5 py-2 rounded-full"
+              className="text-white bg-green1 px-5 py-2 rounded-full mt-4 lg:mt-0 "
             >
               View Details
             </button>
