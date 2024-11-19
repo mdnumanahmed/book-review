@@ -1,23 +1,24 @@
 import { NavLink } from "react-router-dom";
-import ListedBook from "./ListedBook";
 import { useContext } from "react";
 import { DataContext } from "../../Provider/DataProvider";
 import Loader from "../../Shared/Loader/Loader";
+import BookList from "./BookList";
+import SortedBookList from "./SortedBookList";
+import sortBooks from "../../utilities/sortBooks";
 
 const ListedBooks = () => {
   const {
     readList,
-    sortedReadBook,
-    sortedWishBook,
-    active,
-    setActive,
     wishList,
     loading,
-    handleBookDetails,
-    // handleSortBook,
+    active,
+    setActive,
     selected,
     setSelected,
   } = useContext(DataContext);
+
+  const sortedReadBooks = sortBooks(readList, selected);
+  const sortedWishlistBooks = sortBooks(wishList, selected);
 
   if (loading) {
     return <Loader />;
@@ -29,7 +30,6 @@ const ListedBooks = () => {
           <h2>Books</h2>
         </div>
         <div className="text-center py-8">
-          <label htmlFor="">Sort By</label>
           <select
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
@@ -39,7 +39,7 @@ const ListedBooks = () => {
               <option value="">Sort By</option>
               <option value="rating">Rating</option>
               <option value="totalPages">Number of pages</option>
-              <option value="publishedYear">Published year</option>
+              <option value="yearOfPublishing">Published year</option>
             </optgroup>
           </select>
         </div>
@@ -68,7 +68,19 @@ const ListedBooks = () => {
           </NavLink>
         </div>
         <div className="py-8 space-y-6">
-          {sortedReadBook.length <= 0 && active
+          {sortedReadBooks.length ? (
+            active ? (
+              <SortedBookList books={sortedReadBooks} />
+            ) : (
+              <SortedBookList books={sortedWishlistBooks} />
+            )
+          ) : active ? (
+            <BookList books={readList} />
+          ) : (
+            <BookList books={wishList} />
+          )}
+
+          {/* {active
             ? readList.map((book) => (
                 <ListedBook
                   key={book.bookId}
@@ -76,8 +88,7 @@ const ListedBooks = () => {
                   handleBookDetails={handleBookDetails}
                 />
               ))
-            : sortedWishBook.length <= 0 &&
-              !active &&
+            : !active &&
               wishList.map((book) => (
                 <ListedBook
                   key={book.bookId}
@@ -85,7 +96,8 @@ const ListedBooks = () => {
                   handleBookDetails={handleBookDetails}
                 />
               ))}
-          {sortedReadBook.length > 0 && active
+
+          {active && selected
             ? sortedReadBook.map((book) => (
                 <ListedBook
                   key={book.bookId}
@@ -93,15 +105,15 @@ const ListedBooks = () => {
                   handleBookDetails={handleBookDetails}
                 />
               ))
-            : sortedWishBook.length > 0 &&
-              !active &&
+            : !active &&
+              selected &&
               sortedWishBook.map((book) => (
                 <ListedBook
                   key={book.bookId}
                   book={book}
                   handleBookDetails={handleBookDetails}
                 />
-              ))}
+              ))} */}
         </div>
       </div>
     </div>

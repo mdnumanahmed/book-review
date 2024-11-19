@@ -10,6 +10,8 @@ import ListedBooks from "./pages/ListedBooks/ListedBooks.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PagesToRead from "./pages/PagesToRead/PagesToRead.jsx";
+import Books from "./pages/HomePage/Books/Books.jsx";
+import Reviews from "./pages/Reviews/Reviews.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/pages-to-read",
         element: <PagesToRead />,
+      },
+      {
+        path: "/latest-books",
+        element: <Books />,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews />,
       },
     ],
   },
